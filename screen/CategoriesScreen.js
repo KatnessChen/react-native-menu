@@ -29,14 +29,6 @@ const CategoriesScreen = props => {
   )
 }
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: 'Meals Categories',
-  headerStyle: {
-    backgroundColor: Color.primaryColor
-  },
-  headerTintColor: '#FFF'
-}
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
