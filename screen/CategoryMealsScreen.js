@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
-import CATEGORIES from '../data/categories'
+import CATEGORIES from '../data/dummy_categories'
 
-const CategoryMealScreen = props => {
+const CategoryMealsScreen = props => {
   const categoryId = props.navigation.getParam('categoryId')
   const category = CATEGORIES.find(item => item.id === categoryId)
   return (
     <View style={styles.screen}>
-      <Text>CategoryMealScreen</Text>
+      <Text>CategoryMealsScreen</Text>
       <Text>{category.title}</Text>
       <Button title="go to detail" onPress={() => {
         props.navigation.navigate({ routeName: 'MealsDetail' })
@@ -17,7 +17,7 @@ const CategoryMealScreen = props => {
 }
 
 // dynamic screen header title
-CategoryMealScreen.navigationOptions = navigationData => {
+CategoryMealsScreen.navigationOptions = navigationData => {
   const categoryId = navigationData.navigation.getParam('categoryId')
   const category = CATEGORIES.find(item => item.id === categoryId)
   return {
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CategoryMealScreen
+export default CategoryMealsScreen

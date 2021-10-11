@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
-import { Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 
 import CategoryGridTile from '../components/CategoryGridTile'
-import CATEGORIES from '../data/categories'
+import CATEGORIES from '../data/dummy_categories'
 
 
 const CategoriesScreen = props => {
