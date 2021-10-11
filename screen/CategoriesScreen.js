@@ -13,7 +13,7 @@ const CategoriesScreen = props => {
         itemData={itemData.item}
         onSelect={() => {
           props.navigation.navigate({
-            routeName: 'CategoriesMeals',
+            routeName: 'CategoryMeals',
             params: { categoryId: itemData.item.id }
           })
         }}

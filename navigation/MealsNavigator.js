@@ -14,10 +14,10 @@ const navigator = createStackNavigator(
       screen: CategoriesScreen,
       headerTitle: 'Meals Categories'
     },
-    CategoriesMeals: {
+    CategoryMeals: {
       screen: CategoryMealsScreen
     },
-    MealsDetail: MealDetailScreen,
+    MealDetail: MealDetailScreen,
   },
   // route config
   {
