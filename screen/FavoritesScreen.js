@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import MealList from '../components/MealList'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
 import MEALS from '../data/dummy_meal'
+import HeaderButton from '../components/HeaderButton'
 
 const favoriteMealIds = ['m5', 'm10']
 
@@ -26,8 +28,17 @@ const FavoritesScreen = props => {
   )
 }
 
-FavoritesScreen.navigationOptions = {
-  headerTitle: 'Your Favorites'
+FavoritesScreen.navigationOptions = navData => {
+  return {
+    headerTitle: 'Your Favorites',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item title="Menu" iconName="ios-menu" onPress={() => {
+          navData.navigation.toggleDrawer()
+        }} />
+      </HeaderButtons>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
