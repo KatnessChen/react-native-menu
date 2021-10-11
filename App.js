@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
-import Navigation from './navigation/MealsNavigator'
+import Navigation from './navigation/Navigator'
 
 
 const fetchFont = () => {

@@ -12,8 +12,15 @@ import CategoryMealsScreen from '../screen/CategoryMealsScreen'
 import MealDetailScreen from '../screen/MealDetailScreen'
 import FavoritesScreen from '../screen/FavoritesScreen'
 
-const navigator = createStackNavigator(
-  // route map
+const defaultNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === 'android' ? Color.primaryColor : '#FFF'
+  },
+  headerTintColor: Platform.OS === 'android' ? '#FFF' : Color.primaryColor,
+  headerTitle: 'A Screen'
+}
+
+const MealsNavigator = createStackNavigator(
   {
     Categories: {
       screen: CategoriesScreen,
@@ -24,20 +31,19 @@ const navigator = createStackNavigator(
     },
     MealDetail: MealDetailScreen,
   },
-  // route config
+  { defaultNavigationOptions }
+)
+const FavoritesNavigator = createStackNavigator(
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Color.primaryColor : '#FFF'
-      },
-      headerTintColor: Platform.OS === 'android' ? '#FFF' : Color.primaryColor
-    }
-  }
+    Favorites: FavoritesScreen,
+    MealDetail: MealDetailScreen
+  },
+  { defaultNavigationOptions }
 )
 
 const tabScreenConfig = {
   Meals: {
-    screen: navigator,
+    screen: MealsNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
@@ -46,7 +52,7 @@ const tabScreenConfig = {
     } // only matters when inside of another navigator
   },
   Favorites: {
-    screen: FavoritesScreen,
+    screen: FavoritesNavigator,
     navigationOptions: {
       tabBarLabel: 'My Favorites',
       tabBarIcon: tabInfo => {
@@ -56,7 +62,7 @@ const tabScreenConfig = {
     }
   }
 }
-const MealsFavTabNavigator = Platform.OS === 'android'
+const bottomTabNavigator = Platform.OS === 'android'
   ? createMaterialBottomTabNavigator(tabScreenConfig, {
     activeColor: 'white',
     shifting: true,
@@ -71,4 +77,4 @@ const MealsFavTabNavigator = Platform.OS === 'android'
     }
   })
 
-export default createAppContainer(MealsFavTabNavigator)
+export default createAppContainer(bottomTabNavigator)
