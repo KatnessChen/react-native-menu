@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
-import Color from '../constants/Color'
 
+import CategoryGridTile from '../components/CategoryGridTile'
 import CATEGORIES from '../data/categories'
 
 
@@ -9,17 +9,15 @@ const CategoriesScreen = props => {
 
   const renderGridItem = itemData => {
     return (
-      <TouchableOpacity
-        style={styles.grid}
-          onPress={() => {
+      <CategoryGridTile
+        itemData={itemData.item}
+        onSelect={() => {
           props.navigation.navigate({
             routeName: 'CategoriesMeals',
             params: { categoryId: itemData.item.id }
           })
         }}
-      >
-        <Text>{itemData.item.title}</Text>
-      </TouchableOpacity>
+      />
     )
   }
   return (
@@ -34,11 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  grid: {
-    flex: 1,
-    margin: 15,
-    height: 150
   }
 })
 
