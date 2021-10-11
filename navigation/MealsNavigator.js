@@ -2,6 +2,7 @@ import React from 'react'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import Color from '../constants/Color'
@@ -34,33 +35,40 @@ const navigator = createStackNavigator(
   }
 )
 
-const MealsFavTabNavigator = createBottomTabNavigator(
-  // route map
-  {
-    Meals: {
-      screen: navigator,
-      navigationOptions: {
-        tabBarIcon: tabInfo => {
-          return <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
-        }
-      } // only matters when inside of another navigator
-    },
-    Favorites: {
-      screen: FavoritesScreen,
-      navigationOptions: {
-        tabBarLabel: 'My Favorites',
-        tabBarIcon: tabInfo => {
-          return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />
-        }
-      }
-    }
+const tabScreenConfig = {
+  Meals: {
+    screen: navigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
+      },
+      tabBarColor: Color.primaryColor
+    } // only matters when inside of another navigator
   },
-  // route config
-  {
+  Favorites: {
+    screen: FavoritesScreen,
+    navigationOptions: {
+      tabBarLabel: 'My Favorites',
+      tabBarIcon: tabInfo => {
+        return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />
+      },
+      tabBarColor: Color.accentColor
+    }
+  }
+}
+const MealsFavTabNavigator = Platform.OS === 'android'
+  ? createMaterialBottomTabNavigator(tabScreenConfig, {
+    activeColor: 'white',
+    shifting: true,
+    // shifting: false 之下可以設定
+    // barStyle: {
+    //   backgroundColor: Color.primaryColor
+    // }
+  })
+  : createBottomTabNavigator(tabScreenConfig, {
     tabBarOptions: {
       activeTintColor: Color.accentColor
     }
-  }
-)
+  })
 
 export default createAppContainer(MealsFavTabNavigator)
